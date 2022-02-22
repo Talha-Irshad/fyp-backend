@@ -10,10 +10,13 @@ app.use(bodyParser.json());
 //import routes
 const postsRoute=require('./routes/posts')
 const employeeRoute=require('./routes/employee')
+const userRoute=require('./routes/user')
 
 app.use('/posts',postsRoute)
 
 app.use('/employee',employeeRoute)
+
+app.use('/user',userRoute)
 // Routes
 app.get('/', (req, res) => {
     res.send('We are at home')
