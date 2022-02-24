@@ -1,14 +1,7 @@
 const mongoose=require('mongoose')
 
 const UserSchema=mongoose.Schema({
-    userid:{
-        type:Number,
-        required:true
-    },
-    name:{
-        type:String,
-    },
-    fcmtoken:{
+    token:{
         type:String,
         required:true
     }

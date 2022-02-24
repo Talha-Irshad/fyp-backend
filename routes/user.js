@@ -13,31 +13,26 @@ router.get('/',async(req,res)=>{
     }
 })
 
-router.get('/:userid',async(req,res)=>{
-    try{
-        const query=req.params.userid
-        const user =await User.find({userid:query})
-        res.json(user)
-    }catch(err){
-        res.json({message:err})
-        console.log(err)
-    }
-})
 
 router.post('/',async (req,res)=>{
-    const user=new User({
-        userid:req.body.userid,
-        name:req.body.name,
-        fcmtoken:req.body.fcmtoken
-    })
-    try{
-        const saveUser=await user.save()
-        res.json(saveUser)
-    }catch(err){
+    const checkUser=await User.find({token:req.body.token})
+    if(checkUser==[]){
         res.json({
-            message:err
+            message:"user already registered"
         })
-        console.log(err)
+    }else{
+        const user=new User({
+            token:req.body.token
+        })
+        try{
+            const saveUser=await user.save()
+            res.json(saveUser)
+        }catch(err){
+            res.json({
+                message:err
+            })
+            console.log(err)
+        }
     }
 })
 
